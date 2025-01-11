@@ -1,0 +1,1 @@
+# Git repo for Design Patterns 5041.24 (2025)
