@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        Deck deck = new Deck();
+        Deck deck = new Deck(StorageFormat.JSON);
         
         // Shuffle and save in JSON format
         deck.shuffle();
@@ -16,7 +16,7 @@ public class Main {
         }
 
         // Create new deck, load from JSON, and print
-        Deck loadedDeck = new Deck();
+        Deck loadedDeck = new Deck(StorageFormat.JSON);
         loadedDeck.setStorage(StorageFormat.JSON);
         try {
             loadedDeck.load();

@@ -7,13 +7,14 @@ class Deck implements Iterable<Card> {
     private List<Card> cards;
     private DeckStorage storage;
 
-    public Deck() {
+    public Deck(StorageFormat format) {
         cards = new ArrayList<>();
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 cards.add(new Card(suit, rank));
             }
         }
+        setStorage(format);
     }
 
     public Card deal() {
