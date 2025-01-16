@@ -3,46 +3,49 @@ package designpatterns5041.assignment01;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        // 1. Create a new deck to save as JSON
-        System.out.println("-= Json Deck =-");
-        Deck jsonDeck = new Deck();
-        jsonDeck.shuffle();
-        for (Card card : jsonDeck) {
-            System.out.println(card);
+    public static void main(String[] args) {
+        Deck deck = new Deck();
+        
+        // Shuffle and save in JSON format
+        deck.shuffle();
+        deck.setStorage(StorageFormat.JSON);
+        try {
+            deck.save();
+        } catch (IOException e) {
+            System.err.println("Error saving deck to JSON: " + e.getMessage());
         }
-        jsonDeck.save(StorageFormat.JSON);
-        System.out.println();
 
-        // 2. Create a new deck to load from JSON
-        System.out.println("-= Restored Json Deck =-");
-        Deck restoredJsonDeck = new Deck();
-        restoredJsonDeck.shuffle(); // Shuffle for good measure. Will be undone after the load.
-        restoredJsonDeck.load(StorageFormat.JSON);
-        for (Card card : jsonDeck) {
-            System.out.println(card);
+        // Create new deck, load from JSON, and print
+        Deck loadedDeck = new Deck();
+        loadedDeck.setStorage(StorageFormat.JSON);
+        try {
+            loadedDeck.load();
+            System.out.println("Loaded from JSON:");
+            for (Card card : loadedDeck) {
+                System.out.println(card);
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading deck from JSON: " + e.getMessage());
         }
-        jsonDeck.save(StorageFormat.JSON);
-        System.out.println();
 
-        // 3. Create a new deck to save as binary
-        System.out.println("-= Binary Deck =-");
-        Deck binaryDeck = new Deck();
-        binaryDeck.shuffle();
-        for (Card card : binaryDeck) {
-            System.out.println(card);
+        // Save in binary format
+        deck.setStorage(StorageFormat.BINARY);
+        try {
+            deck.save();
+        } catch (IOException e) {
+            System.err.println("Error saving deck to binary: " + e.getMessage());
         }
-        binaryDeck.save(StorageFormat.BINARY);
-        System.out.println();
 
-        // 4. Create a new deck to load from binary
-        System.out.println("-= Restored Binary Deck =-");
-        Deck restoredBinaryDeck = new Deck();
-        restoredBinaryDeck.shuffle();
-        restoredBinaryDeck.load(StorageFormat.BINARY);
-        for (Card card : restoredBinaryDeck) {
-            System.out.println(card);
+        // Load from binary and print
+        loadedDeck.setStorage(StorageFormat.BINARY);
+        try {
+            loadedDeck.load();
+            System.out.println("\nLoaded from binary:");
+            for (Card card : loadedDeck) {
+                System.out.println(card);
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading deck from binary: " + e.getMessage());
         }
-        System.out.println();
     }
 }

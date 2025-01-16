@@ -1,14 +1,11 @@
 package designpatterns5041.assignment01;
 
-import com.google.gson.Gson;
-
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 class Deck implements Iterable<Card> {
     private List<Card> cards;
+    private DeckStorage storage;
 
     public Deck() {
         cards = new ArrayList<>();
@@ -47,52 +44,30 @@ class Deck implements Iterable<Card> {
         return cards.iterator();
     }
 
-    public void load(StorageFormat format) throws IOException {
+    public void setStorage(StorageFormat format) {
         switch (format) {
             case JSON:
-                String serialized = new String(Files.readAllBytes(Paths.get("deck.json")));
-                Gson gson = new Gson();
-                cards = Arrays.asList(gson.fromJson(serialized, Card[].class));
+                this.storage = new JsonDeckStorage();
                 break;
             case BINARY:
-                try (DataInputStream input = new DataInputStream(new FileInputStream("deck.bin"))) {
-                    byte[] bytes = new byte[2 * 52];
-                    int read = input.read(bytes);
-                    List<Card> loaded = new ArrayList<>();
-                    int i = 0;
-                    while (i + 1 < read) {
-                        loaded.add(new Card(Suit.values()[bytes[i]], Rank.values()[bytes[i + 1]]));
-                        i += 2;
-                    }
-                    cards = loaded;
-                }
+                this.storage = new BinaryDeckStorage();
                 break;
             default:
                 throw new UnsupportedOperationException("Storage format " + format + " not supported");
         }
     }
 
-    public void save(StorageFormat format) throws IOException {
-        switch (format) {
-            case JSON:
-                Gson gson = new Gson();
-                String serialized = gson.toJson(cards);
-                Files.write(Paths.get("deck.json"), serialized.getBytes());
-                break;
-            case BINARY:
-                try (DataOutputStream output = new DataOutputStream(new FileOutputStream("deck.bin"))) {
-                    byte[] bytes = new byte[cards.size() * 2];
-                    for (int i = 0; i < cards.size(); i++) {
-                        Card card = cards.get(i);
-                        bytes[(i*2)] = (byte)card.getSuit().ordinal();
-                        bytes[(i*2) + 1] = (byte)card.getRank().ordinal();
-                    }
-
-                    output.write(bytes);
-                }
-                break;
-            default:
-                throw new UnsupportedOperationException("Storage format " + format + " not supported");
+    public void save() throws IOException {
+        if (storage == null) {
+            throw new IllegalStateException("Storage format not set");
         }
+        storage.save(cards);
+    }
+
+    public void load() throws IOException {
+        if (storage == null) {
+            throw new IllegalStateException("Storage format not set");
+        }
+        cards = storage.load();
     }
 }
