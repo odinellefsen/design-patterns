@@ -17,4 +17,4 @@ public class StockMarket {
             observer.update(symbol, price);
         }
     }
-} 
+}
