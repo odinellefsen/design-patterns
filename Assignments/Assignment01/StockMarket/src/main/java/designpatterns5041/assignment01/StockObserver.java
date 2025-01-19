@@ -1,6 +1,6 @@
 package designpatterns5041.assignment01;
 
-public class StockObserver {
+public class StockObserver implements Observer {
     private final StockMarket stockMarket;
     private final String symbol;
     private final double threshold;
@@ -12,6 +12,7 @@ public class StockObserver {
         this.threshold = threshold;
     }
     
+    @Override
     public void update(String symbol, double price) {
         if (this.symbol.equals(symbol) && price > threshold && hasNotSold) {
             System.out.println("StockObserver - Selling " + symbol + " position");
