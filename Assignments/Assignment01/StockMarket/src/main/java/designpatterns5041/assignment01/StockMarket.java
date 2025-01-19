@@ -21,7 +21,7 @@ public class StockMarket implements Subject {
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.update(this.symbol, this.price);
+            observer.update();
         }
     }
 
@@ -30,5 +30,9 @@ public class StockMarket implements Subject {
         this.price = price;
         System.out.printf("StockMarket - %s traded at USD %.2f%n", symbol, price);
         notifyObservers();
+    }
+
+    public double getPrice(String symbol) {
+        return this.symbol.equals(symbol) ? this.price : 0.0;
     }
 }
