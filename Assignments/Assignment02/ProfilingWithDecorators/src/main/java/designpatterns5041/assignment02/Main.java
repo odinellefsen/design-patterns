@@ -5,7 +5,7 @@ import designpatterns5041.assignment02.library.DefaultComputeOperation;
 
 public class Main {
     public static void main(String[] args) {
-        ComputeOperation operation = new DefaultComputeOperation();
+        ComputeOperation operation = new TimingDecorator(new DefaultComputeOperation());
         operation.compute(100);
     }
 }
