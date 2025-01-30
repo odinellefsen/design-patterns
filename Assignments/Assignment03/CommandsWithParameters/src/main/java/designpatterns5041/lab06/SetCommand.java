@@ -13,4 +13,9 @@ public class SetCommand implements Command {
     public void execute() {
         unit.setIntensity(intensity);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Set %s to intensity %d%%", unit, intensity);
+    }
 }
