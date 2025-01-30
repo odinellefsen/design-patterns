@@ -8,7 +8,7 @@ public class Main {
         LedLight light2 = new LedLight(ConsoleColor.ANSI_RED);
         LedLight light3 = new LedLight(ConsoleColor.ANSI_YELLOW);
 
-        // SetCommandFactory factory = new DefaultSetCommandFactory(light1, light2, light3);
+        SetCommandFactory factory = new DefaultSetCommandFactory(light1, light2, light3);
         // LoggingSwitch invoker = new LoggingSwitch();
 
         Random random = new Random();
