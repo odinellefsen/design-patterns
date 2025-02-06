@@ -2,10 +2,10 @@ package designpatterns5041.assignment04;
 
 import designpatterns5041.assignment04.newmediaplayers.Mp4Player;
 
-public class MediaPlayerAdapter implements MediaPlayer {
+public class Mp4MediaPlayerAdapter implements MediaPlayer {
     private Mp4Player mp4Player;
 
-    public MediaPlayerAdapter() {
+    public Mp4MediaPlayerAdapter() {
         mp4Player = new Mp4Player();
     }
 

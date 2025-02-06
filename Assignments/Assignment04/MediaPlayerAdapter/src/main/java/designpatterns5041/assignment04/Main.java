@@ -11,16 +11,17 @@ public class Main {
         // mediaSystem.playMedia();
 
         // Task 1
-       MediaSystem mediaSystem2 = new MediaSystem(
-           new MediaPlayerAdapter()
-       );
-       mediaSystem2.playMedia();
+    //    MediaSystem mediaSystem2 = new MediaSystem(
+    //        new Mp4MediaPlayerAdapter()
+    //    );
+    //    mediaSystem2.playMedia();
 
         // Task 2
-//        MediaSystem mediaSystem3 = new MediaSystem(
-//            // Add the adapter here ...
-//        );
-//        mediaSystem3.playMedia();
+       MediaSystem mediaSystem3 = new MediaSystem(
+           new VlcMediaPlayerAdapter()
+       );
+
+       mediaSystem3.playMedia();
 
         // Task 3
 //        MediaSystem mediaSystem4 = new MediaSystem(
