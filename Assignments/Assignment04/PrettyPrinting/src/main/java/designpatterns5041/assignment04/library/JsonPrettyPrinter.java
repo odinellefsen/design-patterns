@@ -1,30 +1,35 @@
 package designpatterns5041.assignment04.library;
 
 public class JsonPrettyPrinter extends PrettyPrinterBase {
+    private boolean firstProperty;
 
     @Override
     protected void printBegin(String className) {
+        firstProperty = true;
         System.out.println("{");
     }
 
     @Override
     protected void printEnd(String className) {
-        System.out.println("}");
+        System.out.println("\n}");
     }
 
     @Override
     protected void printProperty(String propertyName, Object propertyValue) {
-        // Add quotes around property name and value (if it's a String)
+        if (!firstProperty) {
+            System.out.println(",");
+        }
+        
         String value = propertyValue instanceof String ? 
             "\"" + propertyValue + "\"" : 
             String.valueOf(propertyValue);
         
-        // Check if this is the last property to handle comma
-        System.out.println("    \"" + propertyName + "\": " + value + ",");
+        System.out.print("    \"" + propertyName + "\": " + value);
+        firstProperty = false;
     }
 
     @Override
     protected void printPreamble() {
-        // Remove preamble as it's not needed for JSON format
+        // Not needed for JSON format
     }
 }
