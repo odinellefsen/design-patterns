@@ -2,8 +2,8 @@ package designpatterns5041.assignment04;
 
 import designpatterns5041.assignment04.library.PrettyPrinter;
 // import designpatterns5041.assignment04.library.XmlPrettyPrinter;
-import designpatterns5041.assignment04.library.JsonPrettyPrinter;
-
+// import designpatterns5041.assignment04.library.JsonPrettyPrinter;
+import designpatterns5041.assignment04.library.CsvPrettyPrinter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -19,7 +19,10 @@ public class Main {
         // PrettyPrinter prettyPrinter = new XmlPrettyPrinter();
         // prettyPrinter.print(person, "Person");
 
-        PrettyPrinter prettyPrinter = new JsonPrettyPrinter();
+        // PrettyPrinter prettyPrinter = new JsonPrettyPrinter();
+        // prettyPrinter.print(person, "Person");
+
+        PrettyPrinter prettyPrinter = new CsvPrettyPrinter(true);
         prettyPrinter.print(person, "Person");
     }
 }
