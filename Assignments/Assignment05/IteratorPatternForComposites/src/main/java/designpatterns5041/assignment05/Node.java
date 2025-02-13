@@ -1,10 +1,10 @@
 package designpatterns5041.assignment05;
 
-public class Node {
+import java.util.Iterator;
+
+public class Node implements Iterable<Integer> {
     private final int value;
-
     private final Node left;
-
     private final Node right;
 
     public Node(int value, Node left, Node right) {
@@ -23,5 +23,10 @@ public class Node {
 
     public Node getRight() {
         return right;
+    }
+
+    @Override
+    public Iterator<Integer> iterator() {
+        return new NodeIterator(this);
     }
 }
