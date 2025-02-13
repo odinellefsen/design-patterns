@@ -11,7 +11,7 @@ public class NormalState extends TimerSetupStateBase{
 
     @Override
     public Display getDisplay() {
-        return new Display(ConsoleColor.ANSI_PURPLE, context.getTimerSet().format(DateTimeFormatter.ofPattern("HH:mm")));
+        return new Display(ConsoleColor.ANSI_PURPLE, context.getTimerSet().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
     }
 
     @Override

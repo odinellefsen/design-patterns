@@ -10,13 +10,13 @@ public class CompletedState extends TimerSetupStateBase {
 
     public CompletedState(TimerSetup context, CompletedPayload payload) {
         super(context);
-
-        timeSet = LocalTime.of(payload.getTimerHours(), payload.getTimerMinutes());
+        timeSet = LocalTime.of(payload.getTimerHours(), payload.getTimerMinutes(), payload.getTimerSeconds());
+        context.setTimerSet(timeSet);
     }
 
     @Override
     public Display getDisplay() {
-        return new Display(ConsoleColor.ANSI_GREEN, timeSet.format(DateTimeFormatter.ofPattern("HH:mm")));
+        return new Display(ConsoleColor.ANSI_GREEN, timeSet.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
     }
 
     @Override

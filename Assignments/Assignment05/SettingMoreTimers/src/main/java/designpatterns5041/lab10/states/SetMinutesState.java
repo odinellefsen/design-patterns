@@ -26,16 +26,26 @@ public class SetMinutesState extends TimerSetupStateBase {
 
     @Override
     public Display getDisplay() {
-        return new Display(ConsoleColor.ANSI_RED, String.format("%02d:%02d", payload.getTimerHours(), timerMinutes));
+        String currentSeconds = String.format("%02d", context.getTimerSet().getSecond());
+        return new Display(ConsoleColor.ANSI_RED, 
+            String.format("%02d:%02d:%s", payload.getTimerHours(), timerMinutes, currentSeconds));
     }
 
     @Override
     public void onUpPressed() {
         timerMinutes = (timerMinutes + 1) % 60;
+        if (timerMinutes == 0) {  // Rolled over
+            int newHours = (payload.getTimerHours() + 1) % 24;
+            changeState(new SetMinutesState(context, new SetMinutesPayload(newHours)));
+        }
     }
 
     @Override
     public void onDownPressed() {
         timerMinutes = (timerMinutes - 1 + 60) % 60;
+        if (timerMinutes == 59) {  // Rolled under
+            int newHours = (payload.getTimerHours() - 1 + 24) % 24;
+            changeState(new SetMinutesState(context, new SetMinutesPayload(newHours)));
+        }
     }
 }

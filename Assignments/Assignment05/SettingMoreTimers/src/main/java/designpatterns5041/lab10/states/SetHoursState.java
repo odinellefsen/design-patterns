@@ -14,7 +14,10 @@ public class SetHoursState extends TimerSetupStateBase{
 
     @Override
     public Display getDisplay() {
-        return new Display(ConsoleColor.ANSI_RED, String.format("%02d", timerHours));
+        String currentMinutes = String.format("%02d", context.getTimerSet().getMinute());
+        String currentSeconds = String.format("%02d", context.getTimerSet().getSecond());
+        return new Display(ConsoleColor.ANSI_RED, 
+            String.format("%02d:%s:%s", timerHours, currentMinutes, currentSeconds));
     }
 
     @Override

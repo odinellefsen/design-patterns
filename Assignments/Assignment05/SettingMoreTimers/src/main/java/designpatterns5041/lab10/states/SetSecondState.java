@@ -32,10 +32,26 @@ public class SetSecondState extends TimerSetupStateBase {
     @Override
     public void onUpPressed() {
         timerSeconds = (timerSeconds + 1) % 60;
+        if (timerSeconds == 0) {  // Rolled over
+            int newMinutes = (payload.getTimerMinutes() + 1) % 60;
+            int newHours = payload.getTimerHours();
+            if (newMinutes == 0) {  // Minutes rolled over
+                newHours = (newHours + 1) % 24;
+            }
+            changeState(new SetSecondState(context, new SetSecondPayload(newHours, newMinutes)));
+        }
     }
 
     @Override
     public void onDownPressed() {
         timerSeconds = (timerSeconds - 1 + 60) % 60;
+        if (timerSeconds == 59) {  // Rolled under
+            int newMinutes = (payload.getTimerMinutes() - 1 + 60) % 60;
+            int newHours = payload.getTimerHours();
+            if (newMinutes == 59) {  // Minutes rolled under
+                newHours = (newHours - 1 + 24) % 24;
+            }
+            changeState(new SetSecondState(context, new SetSecondPayload(newHours, newMinutes)));
+        }
     }
 }

@@ -23,8 +23,13 @@ public class Main {
         setup.onDownPressed();
         setup.showDisplay();
 
-        // Change to completed
+        // Change to seconds + 5
         setup.onOkPressed();
+        setup.onUpPressed();
+        setup.onUpPressed();
+        setup.onUpPressed();
+        setup.onUpPressed();
+        setup.onUpPressed();
         setup.showDisplay();
 
         // Timer setup finished
