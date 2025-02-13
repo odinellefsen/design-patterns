@@ -21,7 +21,7 @@ public class SetMinutesState extends TimerSetupStateBase {
 
     @Override
     public void onOkPressed() {
-        changeState(new CompletedState(context, new CompletedPayload(payload.getTimerHours(), timerMinutes)));
+        changeState(new SetSecondState(context, new SetSecondPayload(payload.getTimerHours(), timerMinutes)));
     }
 
     @Override
