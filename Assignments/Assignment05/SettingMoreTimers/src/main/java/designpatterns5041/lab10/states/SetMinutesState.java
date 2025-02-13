@@ -34,18 +34,10 @@ public class SetMinutesState extends TimerSetupStateBase {
     @Override
     public void onUpPressed() {
         timerMinutes = (timerMinutes + 1) % 60;
-        if (timerMinutes == 0) {  // Rolled over
-            int newHours = (payload.getTimerHours() + 1) % 24;
-            changeState(new SetMinutesState(context, new SetMinutesPayload(newHours)));
-        }
     }
 
     @Override
     public void onDownPressed() {
         timerMinutes = (timerMinutes - 1 + 60) % 60;
-        if (timerMinutes == 59) {  // Rolled under
-            int newHours = (payload.getTimerHours() - 1 + 24) % 24;
-            changeState(new SetMinutesState(context, new SetMinutesPayload(newHours)));
-        }
     }
 }
